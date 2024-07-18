@@ -11,8 +11,7 @@ COPY package.json ./
 COPY yarn.lock ./
 
 # Install the dependencies
-# Use 'yarn ci' instead of 'yarn install' to ensure a clean and reproducible install of dependencies
-RUN yarn ci
+RUN yarn install
 
 # Copy the rest of the application code to the working directory
 COPY . .
