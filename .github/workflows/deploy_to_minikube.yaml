@@ -21,7 +21,7 @@ jobs:
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
-        image: ${{ secrets.DOCKERHUB_USERNAME }}/docker-k8-learning-api
+        image: asad199/docker-k8-learning-api
         tags: ${{ github.sha }}, latest
         registry: docker.io
         dockerfile: Dockerfile
