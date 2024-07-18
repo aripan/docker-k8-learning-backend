@@ -1,6 +1,4 @@
 node_modules/
-yarn.lock
 .DS_Store
 .env
-docker-compose.yaml
-src/db/init-db.js
+.dockerignore
