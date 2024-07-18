@@ -2,6 +2,5 @@ node_modules/
 yarn.lock
 .DS_Store
 .env
-Dockerfile
 docker-compose.yaml
 src/db/init-db.js
