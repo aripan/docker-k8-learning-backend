@@ -1,0 +1,53 @@
+apiVersion: apps/v1 # API version being used
+kind: Deployment # Type of Kubernetes object
+metadata:
+  name: node-app-deployment # Name of the deployment
+  labels:
+    app: node-app # Label to identify the app
+spec:
+  replicas: 1 # Number of pod replicas
+  selector:
+    matchLabels:
+      app: node-app # Label selector to identify the pods
+  template:
+    metadata:
+      labels:
+        app: node-app # Label to identify the app
+    spec:
+      containers:
+        - name: node-app # Name of the container
+          image: node-app-image # Docker image to use for the container. will be replaced by the image built from Dockerfile
+          ports:
+            - containerPort: 4000 # Port to expose on the container
+          # Environment variables for Node.js app
+          env:
+            - name: MONGO_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-config
+                  key: mongo-url
+            - name: MONGO_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-user
+            - name: MONGO_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: mongo-password
+
+---
+
+apiVersion: v1 # API version being used
+kind: Service # Type of Kubernetes object
+metadata:
+  name: node-app-service # Name of the service
+spec:
+  type: LoadBalancer
+  selector:
+    app: node-app # Label selector to identify the pods
+  ports:
+    - protocol: TCP # Protocol to be used
+      port: 4000 # Port to expose on the service
+      targetPort: 4000 # Port to target on the pod

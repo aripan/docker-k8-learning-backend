@@ -1,0 +1,6 @@
+apiVersion: v1 # API version being used
+kind: ConfigMap # Type of Kubernetes object
+metadata:
+  name: mongo-config # Name of the ConfigMap
+data:
+  mongo-url: mongo-service # URL of the MongoDB service

@@ -1,0 +1,12 @@
+node_modules
+yarn.lock
+Dockerfile
+.dockerignore
+docker-compose.yml
+.env
+src/db/init-scripts/init-db.js
+src/db/Dockerfile
+mongo-config.yaml
+node-app.yaml
+mongo-secret.yaml
+mongo-app.yaml
