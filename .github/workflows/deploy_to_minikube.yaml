@@ -13,6 +13,11 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@v4
 
+    - name: Start Minikube
+      run: |
+        minikube start --driver=docker
+        minikube kubectl -- get pods --all-namespaces
+
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v6
       with:
@@ -25,11 +30,6 @@ jobs:
 
     - name: Replace node-app-image name in node-app.yaml #
       run: sed -i 's|node-app-image|${{ secrets.DOCKERHUB_USERNAME }}/docker-k8-learning-api:latest|g' node-app.yaml
-
-    - name: Start Minikube
-      run: |
-        minikube start --driver=docker
-        minikube kubectl -- get pods --all-namespaces
 
     - name: Apply Kubernetes ConfigMap
       run: kubectl apply -f mongo-config.yaml
