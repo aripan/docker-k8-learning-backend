@@ -24,12 +24,12 @@ jobs:
 
     - name: Build and push Node.js image
       run: |
-        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app-image:latest -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app-image:${{ github.sha }} .
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-app-image:latest
-        docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-app-image:${{ github.sha }}
+        docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/docker-k8-learning-api:latest -t ${{ secrets.DOCKERHUB_USERNAME }}/docker-k8-learning-api:${{ github.sha }} .
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/docker-k8-learning-api:latest
+        docker push ${{ secrets.DOCKERHUB_USERNAME }}/docker-k8-learning-api:${{ github.sha }}
 
     - name: Replace node-app-image name in node-app.yaml #
-      run: sed -i 's|node-app-image|${{ secrets.DOCKERHUB_USERNAME }}/node-app-image:latest|g' node-app.yaml
+      run: sed -i 's|node-app-image|${{ secrets.DOCKERHUB_USERNAME }}/docker-k8-learning-api:latest|g' node-app.yaml
 
     - name: Start Minikube
       run: |
