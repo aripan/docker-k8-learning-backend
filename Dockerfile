@@ -7,7 +7,8 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 
 # Copy package.json and yarn.lock to the working directory
-COPY package.json yarn.lock ./
+COPY package.json ./
+COPY yarn.lock ./
 
 # Install the dependencies
 # Use 'yarn ci' instead of 'yarn install' to ensure a clean and reproducible install of dependencies
